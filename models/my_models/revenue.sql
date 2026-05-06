@@ -1,3 +1,11 @@
+-- writing config inside the model and giving it a different name using jinja language
+{{config
+    (
+        materialized = 'view',
+        alias = 'revenue_vw' 
+    )   
+}}
+
 SELECT
     p.NAME AS PRODUCT_NAME,
     SUM(o.QUANTITY * p.UNIT_PRICE) AS REVENUE
