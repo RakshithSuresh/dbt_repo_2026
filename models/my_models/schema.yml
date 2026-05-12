@@ -1,0 +1,33 @@
+models:
+  - name: revenue
+    description: "This model calculates revenue for every product"
+    columns:
+      - name: product_name
+        description: "This is the product name column"
+        tests:
+          - unique
+          - not_null
+      - name: revenue
+        description: "This is the final revenue value column"
+        tests:
+          - negative_check
+          
+sources:
+  - name: raw_data
+    database: dbt
+    schema: raw_data
+    tables:
+      - name: orders
+        columns:
+          - name: quantity
+            description: "This is the total number of quantities purchased for every order row"
+            tests:
+              - not_null
+              - negative_check
+      - name: products
+        columns:
+          - name: unit_price
+            description: "This is the unit price column"
+            tests:
+              - not_null
+              - negative_check
